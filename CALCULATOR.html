@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+            color: #000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background-color: #121212;
+            color: #e0e0e0;
+        }
+
+        .calculator {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s;
+        }
+        .dark-mode .calculator {
+            background-color: #1e1e1e;
+            box-shadow: 0 4px 8px rgba(255, 255, 255, 0.1);
+        }
+
+        .calculator-display {
+            width: 94%;
+            height: 50px;
+            font-size: 1.5em;
+            padding: 10px;
+            margin-bottom: 20px;
+            text-align: right;
+            border: none;
+            border-radius: 8px;
+            background-color: #f4f4f9;
+            color: #000;
+            transition: background-color 0.3s, color 0.3s;
+        }
+        .dark-mode .calculator-display {
+            background-color: #333;
+            color: #fff;
+        }
+
+        .calculator-buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        .calculator-buttons button {
+            padding: 15px;
+            font-size: 1.2em;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+        }
+        .calculator-buttons button:hover {
+            background-color: #45a049;
+            transform: scale(1.1);
+        }
+        .dark-mode .calculator-buttons button {
+            background-color: #555;
+        }
+        .dark-mode .calculator-buttons button:hover {
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="calculator-display" class="calculator-display" disabled />
+        <div class="calculator-buttons">
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('/')">÷</button>
+
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="appendValue('*')">×</button>
+
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="appendValue('-')">−</button>
+
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendValue('+')">+</button>
+
+            <button onclick="calculateResult()" style="grid-column: span 4; background-color: #f57c00;">=</button>
+        </div>
+    </div>
+
+    <button onclick="toggleDarkMode()" style="display: block; margin: 20px auto; padding: 10px 20px; background-color: #4CAF50; color: white; border: none; border-radius: 5px;">Toggle Dark Mode</button>
+
+    <script>
+        const display = document.getElementById('calculator-display');
+        let isDarkMode = false;
+
+        function appendValue(value) {
+            display.value += value;
+        }
+
+        function clearDisplay() {
+            display.value = '';
+        }
+
+        function calculateResult() {
+            try {
+                display.value = eval(display.value);
+            } catch (e) {
+                alert('Invalid Expression');
+                clearDisplay();
+            }
+        }
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('dark-mode');
+            isDarkMode = !isDarkMode;
+        }
+    </script>
+
+</body>
+</html>
